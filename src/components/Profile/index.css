@@ -1,0 +1,52 @@
+/* Profile container */
+.profile-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+/* User info section */
+.profile-info {
+  flex-grow: 1;
+}
+
+.profile-info h2,
+.profile-info p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Profile icon in the top-right corner */
+.profile-icon {
+  margin-left: auto;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 10px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 1000;
+}
+
+.dropdown-menu button {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 8px;
+  color: #007BFF;
+  cursor: pointer;
+}
+
+.dropdown-menu button:hover {
+  background-color: #f0f0f0;
+}
