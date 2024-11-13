@@ -233,7 +233,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
-import { deleteUser, loginUser, updateUser } from "../../api/auth";
+import { deleteUser, getUserDetails, loginUser, updateUser } from "../../api/auth";
 
 function Profile() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -282,10 +282,12 @@ function Profile() {
     if (updatedUser.email !== user.email) changes.email = updatedUser.email;
 
     console.log("Updated user data:", changes);
-    setIsEditing(false);
     await updateUser(user.id,changes);
-    const userDetails = await loginUser(user.email, user.password);
-    setUpdatedUser(userDetails.user);
+    console.log("user",user);
+    const userDetails = await getUserDetails(user.id);
+    console.log("userDetails",userDetails.userDetails);
+    localStorage.setItem("user",JSON.stringify(userDetails.userDetails));
+    setIsEditing(false);
   };
 
   // Handle cancel action
@@ -336,8 +338,8 @@ function Profile() {
           </>
         ) : (
           <>
-            <span>{updatedUser.name}</span>
-            <p>{updatedUser.email}</p>
+            <span>{user.name}</span>
+            <p>{user.email}</p>
           </>
         )}
       </div>

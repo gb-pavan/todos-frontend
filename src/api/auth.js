@@ -115,6 +115,32 @@ export const updateUser = async (id, updates) => {
   }
 };
 
+export const getUserDetails = async (id) => {
+  console.log("Fetching user details for id:", id);
+
+  try {
+    const response = await fetch(`https://todos-backend-fuh0.onrender.com/api/profile/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      const errorDetails = await response.json(); // Log specific error details
+      console.error("Error details:", errorDetails);
+      throw new Error('Failed to fetch user details');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    return { success: false, message: error.message };
+  }
+};
+
+
 export const deleteUser = async (id) => {
   console.log("Deleting user with id:", id);
 
