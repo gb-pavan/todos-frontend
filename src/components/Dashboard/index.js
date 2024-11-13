@@ -19,7 +19,6 @@ function Dashboard() {
   };
 
   const handleAddTodo = async () => {
-    console.log("yesssssssssss");
     await addTodo({ text: newTodo });
     fetchTodos();
   };

@@ -13,7 +13,9 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await loginUser(form);
+    console.log("token",response.token);
     localStorage.setItem("token", response.token);
+    console.log('in local storage', localStorage.getItem("token"));
     localStorage.setItem("user", JSON.stringify(response.user));
     navigate("/dashboard");
   };
