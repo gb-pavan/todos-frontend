@@ -76,16 +76,19 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../api/auth";
+import { ClipLoader } from "react-spinners";
 import "./index.css";
 
 function SignUp() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [message, setMessage] = useState(null);
+  const [isLoading,setIsLoading]= useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     console.log("form", form);
 
@@ -94,12 +97,13 @@ function SignUp() {
       console.log("response", response);
 
       if (response.message === 'User registered successfully, please sign in.') {
-        setMessage(response.message);
+        setMessage("User Registered. Redirecting to Login Page");
 
         // Delay redirection to show the message first
         setTimeout(() => {
+          setIsLoading(false);
           navigate("/login");
-        }, 5000); // 2-second delay
+        }, 5000); 
       } else {
         setMessage(response.message || "Registration failed. Please try again.");
       }
@@ -124,6 +128,7 @@ function SignUp() {
         <div>
           <button type="submit">Sign Up</button>
         </div>
+        {isLoading? <ClipLoader color="#3498db" size={30} />:null}
         {message && <p className="message">{message}</p>}
       </form>
     </div>

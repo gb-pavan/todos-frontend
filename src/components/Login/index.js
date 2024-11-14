@@ -2,22 +2,29 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../api/auth";
+import { ClipLoader } from "react-spinners";
 import "./index.css";
 
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
+  const [isLoading,setIsLoading]= useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     const response = await loginUser(form);
     console.log("token",response.token);
     localStorage.setItem("token", response.token);
     console.log('in local storage', localStorage.getItem("token"));
     localStorage.setItem("user", JSON.stringify(response.user));
-    navigate("/dashboard");
+    setTimeout(()=>{
+      setIsLoading(false);
+      navigate("/dashboard");
+    },3000);
+    
   };
 
   return (
@@ -42,7 +49,9 @@ function Login() {
         </div>
         <div>
           <button type="submit">Sign In</button>
+          
         </div>
+        {isLoading? <ClipLoader color="#3498db" size={30} />:null}
       </form>
     </div>
   );

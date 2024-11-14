@@ -10,8 +10,11 @@
 .signup-form{   
     display: flex;
     flex-direction: column; 
+    justify-content: center;
+    align-items: center;
     background-color: rgb(237, 139, 139);
     padding: 150px;
+    text-align: center;
     gap: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);    

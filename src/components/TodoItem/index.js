@@ -34,6 +34,7 @@ function Todo({ todo, onUpdate, onDelete }) {
   const [editableTitle, setEditableTitle] = useState(todo.title);
   const [editableStatus, setEditableStatus] = useState(todo.status);
   const [isLoading,setIsLoading] = useState(false);
+  const [isDeleting,setIsDeleting] = useState(false);
 
 
    // Define button styles for each status type
@@ -70,10 +71,12 @@ function Todo({ todo, onUpdate, onDelete }) {
   };
 
   const handleDeleteClick = async () => {
+    setIsDeleting(true);
     setIsLoading(true);
     await onDelete(todo.id);
     setTimeout(() => {
       setIsLoading(false); // Stop spinner
+      setIsDeleting(false);
     }, 4000); 
   }
 
@@ -105,7 +108,7 @@ function Todo({ todo, onUpdate, onDelete }) {
             todo.status}
           </button>
           <button onClick={handleEditClick}><FaEdit /></button>
-          <button onClick={handleDeleteClick}>{isLoading?<ClipLoader color="#3498db" size={30} /> :<MdDelete />}</button>
+          <button onClick={handleDeleteClick}>{isLoading && isDeleting?<ClipLoader color="#3498db" size={30} /> :<MdDelete />}</button>
         </>
       )}
     </div>
