@@ -1,5 +1,6 @@
 // src/components/Dashboard/Dashboard.js
 import React, { useEffect, useState } from "react";
+import { ClipLoader } from "react-spinners";
 import { getTodos, addTodo, updateTodo, deleteTodo } from "../../api/todo";
 import Profile from "../Profile";
 import Todo from "../TodoItem";
@@ -8,6 +9,7 @@ import "./index.css";
 function Dashboard() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
+  const [isLoading,setIsLoading] = useState(false);
 
   useEffect(() => {
     fetchTodos();
@@ -19,8 +21,12 @@ function Dashboard() {
   };
 
   const handleAddTodo = async () => {
+    setIsLoading(true);
     await addTodo({ text: newTodo });
     fetchTodos();
+    setTimeout(() => {
+      setIsLoading(false); // Stop spinner
+    }, 4000); 
   };
 
   const handleUpdateTodo = async (id, updates) => {
@@ -45,8 +51,8 @@ function Dashboard() {
         <button onClick={handleAddTodo}>Add Todo</button>        
       </div>
 
-      
-          {todos.map((todo) => (<div className="todo-list">
+
+          {isLoading? <ClipLoader color="#3498db" size={30} />: todos.map((todo) => (<div className="todo-list">
             <Todo
               key={todo.id}
               todo={todo}

@@ -143,6 +143,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
 import { deleteUser, getUserDetails, updateUser } from "../../api/auth";
+import { ClipLoader } from "react-spinners";
 
 function Profile() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -150,6 +151,7 @@ function Profile() {
   const [isEditing, setIsEditing] = useState(false);
   const [isResettingPassword, setIsResettingPassword] = useState(false);
   const [newPassword, setNewPassword] = useState("");
+  const [isLoading,setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [updatedUser, setUpdatedUser] = useState({
     name: user.name,
@@ -189,6 +191,7 @@ function Profile() {
 
   // Handle save action
   const handleSave = async () => {
+    setIsLoading(true);
     const changes = {};
     if (updatedUser.name !== user.name) changes.name = updatedUser.name;
     if (updatedUser.email !== user.email) changes.email = updatedUser.email;
@@ -196,6 +199,10 @@ function Profile() {
     await updateUser(user.id, changes);
     const userDetails = await getUserDetails(user.id);
     localStorage.setItem("user", JSON.stringify(userDetails.userDetails));
+     setTimeout(() => {
+      setIsLoading(false); // Stop spinner
+    }, 4000); 
+  
     setIsEditing(false);
   };
 
@@ -294,8 +301,8 @@ function Profile() {
           </>
         ) : (
           <>
-            <span>{user.name}</span>
-            <p>You are logged in with {user.email}</p>
+            <span>{isLoading? <ClipLoader color="#3498db" size={30} />: user.name}</span>
+            <p>You are logged in with {isLoading? <ClipLoader color="#3498db" size={30} />:user.email}</p>
           </>
         )}
       </div>

@@ -25,6 +25,7 @@ import React, { useState } from "react";
 import "./index.css";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { ClipLoader } from "react-spinners";
 
 
 
@@ -32,6 +33,8 @@ function Todo({ todo, onUpdate, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editableTitle, setEditableTitle] = useState(todo.title);
   const [editableStatus, setEditableStatus] = useState(todo.status);
+  const [isLoading,setIsLoading] = useState(false);
+
 
    // Define button styles for each status type
   const statusButtonStyles = {
@@ -48,6 +51,7 @@ function Todo({ todo, onUpdate, onDelete }) {
 
   // Save changes and exit edit mode
   const handleSaveClick = () => {
+    setIsLoading(true);
     const updatedFields = {};
     if (editableTitle !== todo.title) updatedFields.title = editableTitle;
     if (editableStatus !== todo.status) updatedFields.status = editableStatus;
@@ -56,6 +60,9 @@ function Todo({ todo, onUpdate, onDelete }) {
     if (Object.keys(updatedFields).length > 0) {
       onUpdate(todo.id, updatedFields);
     }
+    setTimeout(() => {
+      setIsLoading(false); // Stop spinner
+    }, 4000); 
 
     setIsEditing(false); // Exit edit mode
   };
@@ -83,8 +90,8 @@ function Todo({ todo, onUpdate, onDelete }) {
         </>
       ) : (
         <>
-          <span>{todo.title}</span>
-          <button style={statusButtonStyles[todo.status]}>{todo.status}</button>
+          <span>{isLoading? <ClipLoader color="#3498db" size={30} />: todo.title}</span>
+          <button style={statusButtonStyles[todo.status]}>{isLoading? <ClipLoader color="#3498db" size={30} />: todo.status}</button>
           <button onClick={handleEditClick}><FaEdit /></button>
           <button onClick={() => onDelete(todo.id)}><MdDelete /></button>
         </>
