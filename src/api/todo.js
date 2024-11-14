@@ -120,11 +120,11 @@ export const getTodos = async () => {
 export const updateTodo = async (id, updatedTodo) => {
   const token = localStorage.getItem("token"); // Retrieve token from storage
 
-  const todoData = {
-    title: updatedTodo.title || "Untitled",
-    description: updatedTodo.description || "No description provided",
-    status: updatedTodo.status || "In Progress", // Set default values as needed
-  };
+  // const todoData = {
+  //   title: updatedTodo.title || "Untitled",
+  //   description: updatedTodo.description || "No description provided",
+  //   status: updatedTodo.status || "In Progress", // Set default values as needed
+  // };
 
   try {
     const response = await fetch(`https://todos-backend-fuh0.onrender.com/api/tasks/${id}`, {
@@ -133,7 +133,7 @@ export const updateTodo = async (id, updatedTodo) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`, // Add the bearer token
       },
-      body: JSON.stringify(todoData),
+      body: JSON.stringify(updatedTodo),
     });
 
     // Check if response is OK
