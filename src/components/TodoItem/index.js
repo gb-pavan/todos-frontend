@@ -56,6 +56,8 @@ function Todo({ todo, onUpdate, onDelete }) {
     if (editableTitle !== todo.title) updatedFields.title = editableTitle;
     if (editableStatus !== todo.status) updatedFields.status = editableStatus;
 
+    console.log("updatedFields",updatedFields);
+
     // Only call onUpdate if there are changes
     if (Object.keys(updatedFields).length > 0) {
       onUpdate(todo.id, updatedFields);
@@ -90,8 +92,10 @@ function Todo({ todo, onUpdate, onDelete }) {
         </>
       ) : (
         <>
-          <span>{isLoading? <ClipLoader color="#3498db" size={30} />: todo.title}</span>
-          <button style={statusButtonStyles[todo.status]}>{isLoading? <ClipLoader color="#3498db" size={30} />: todo.status}</button>
+          <span>{isLoading && editableTitle !== todo.title ?<ClipLoader color="#3498db" size={30} /> : todo.title}</span>
+          <button style={statusButtonStyles[todo.status]}>{isLoading && editableStatus !== todo.title ?<ClipLoader color="#3498db" size={30} /> : 
+            todo.status}
+          </button>
           <button onClick={handleEditClick}><FaEdit /></button>
           <button onClick={() => onDelete(todo.id)}><MdDelete /></button>
         </>

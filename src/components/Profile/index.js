@@ -139,11 +139,193 @@
 
 // export default Profile;
 
+// import React, { useState, useEffect, useRef } from "react";
+// import "./index.css";
+// import { useNavigate } from "react-router-dom";
+// import { deleteUser, getUserDetails, updateUser } from "../../api/auth";
+// import { ClipLoader } from "react-spinners";
+// import { CgProfile } from "react-icons/cg";
+
+
+// function Profile() {
+//   const user = JSON.parse(localStorage.getItem("user"));
+//   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+//   const [isEditing, setIsEditing] = useState(false);
+//   const [isResettingPassword, setIsResettingPassword] = useState(false);
+//   const [newPassword, setNewPassword] = useState("");
+//   const [isLoading,setIsLoading] = useState(false);
+//   const navigate = useNavigate();
+//   const [updatedUser, setUpdatedUser] = useState({
+//     name: user.name,
+//     email: user.email,
+//   });
+
+//   useEffect(() => {
+//   console.log("isDropdownOpen", isDropdownOpen);
+// }, [isDropdownOpen]); // This runs every time `isDropdownOpen` changes
+
+//   const dropdownRef = useRef(null);
+
+//   // Toggle dropdown visibility
+//   const toggleDropdown = () => {
+//     console.log("clicked");
+//     setIsDropdownOpen((prev) => !prev);
+//   };
+
+//   // Close dropdown if clicking outside of it
+//   const handleClickOutside = (event) => {
+//     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+//       setIsDropdownOpen(false);
+//       setIsResettingPassword(false);
+//     }
+//   };
+
+//   useEffect(() => {
+//     document.addEventListener("mousedown", handleClickOutside);
+//     return () => {
+//       document.removeEventListener("mousedown", handleClickOutside);
+//     };
+//   }, []);
+
+//   // Handle input changes
+//   const handleInputChange = (e) => {
+//     const { name, value } = e.target;
+//     setUpdatedUser((prev) => ({
+//       ...prev,
+//       [name]: value,
+//     }));
+//   };
+
+//   // Handle save action
+//   const handleSave = async () => {
+//     setIsLoading(true);
+//     const changes = {};
+//     if (updatedUser.name !== user.name) changes.name = updatedUser.name;
+//     if (updatedUser.email !== user.email) changes.email = updatedUser.email;
+
+//     await updateUser(user.id, changes);
+//     const userDetails = await getUserDetails(user.id);
+//     localStorage.setItem("user", JSON.stringify(userDetails.userDetails));
+//      setTimeout(() => {
+//       setIsLoading(false); // Stop spinner
+//     }, 4000); 
+  
+//     setIsEditing(false);
+//   };
+
+//   // Handle cancel action
+//   const handleCancel = () => {
+//     setUpdatedUser({ name: user.name, email: user.email });
+//     setIsEditing(false);
+//   };
+
+//   // Handle edit click
+//   const handleEditClick = () => {
+//     setIsEditing(true);
+//     setIsDropdownOpen(false); // Close dropdown on edit
+//   };
+
+//   // Handle password reset action
+//   const handlePasswordReset = async () => {
+//     if (newPassword) {
+//       await updateUser(user.id, { password: newPassword });
+//       setNewPassword("");
+//       setIsResettingPassword(false);
+//       alert("Password has been reset successfully.");
+//     } else {
+//       alert("Please enter a new password.");
+//     }
+//   };
+
+//   const handleSignOut = () => {
+//     localStorage.removeItem("token");
+//     navigate("/login");
+//   };
+
+//   const handleDeleteAccount = async () => {
+//     await deleteUser(user.id);
+//     navigate("/signup");
+//   };
+
+//   return (
+//     <div>
+      
+//       <div className="header">
+//         <div className="todo-app-text">Todo Application</div>
+
+//         <div className="profile-container">
+//           {/* Profile icon in the top-right corner */}
+//           <div className="profile-icon" onClick={toggleDropdown}>
+//             <span role="img" aria-label="profile icon"><CgProfile color="white" /></span>
+//           </div>
+//           {/* Dropdown menu with Edit Profile and Reset Password options */}
+//           {isDropdownOpen && (
+//             <div className="dropdown-menu" ref={dropdownRef}>
+//               <button onClick={handleEditClick}>Edit Profile</button>
+
+//               {isResettingPassword ? (
+//                 <div className="password-reset">
+//                   <input
+//                     type="password"
+//                     placeholder="New password"
+//                     value={newPassword}
+//                     onChange={(e) => setNewPassword(e.target.value)}
+//                   />
+//                   <button onClick={handlePasswordReset}>Confirm</button>
+//                   <button onClick={() => setIsResettingPassword(false)}>Cancel</button>
+//                 </div>
+//               ) : (
+//                 <button onClick={() => setIsResettingPassword(true)}>Reset Password</button>
+//               )}
+
+//               <button onClick={handleSignOut}>Sign Out</button>
+//               <button onClick={handleDeleteAccount}>Delete Account</button>
+//             </div>
+//           )}     
+//         </div>
+//       </div>
+
+//       <div className="user-info">
+//         <span>Welcome , </span>
+//         {isEditing ? (
+//           <>
+//             <input
+//               type="text"
+//               name="name"
+//               value={updatedUser.name}
+//               onChange={handleInputChange}
+//             />
+//             <input
+//               type="email"
+//               name="email"
+//               value={updatedUser.email}
+//               onChange={handleInputChange}
+//             />
+//             <div className="action-buttons">
+//               <button onClick={handleSave}>Save</button>
+//               <button onClick={handleCancel}>Cancel</button>
+//             </div>
+//           </>
+//         ) : (
+//           <>
+//             <span>{isLoading? <ClipLoader color="#3498db" size={30} />: user.name}</span>
+//             <p>You are logged in with {isLoading? <ClipLoader color="#3498db" size={30} />:user.email}</p>
+//           </>
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Profile;
+
+
 import React, { useState, useEffect, useRef } from "react";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
 import { deleteUser, getUserDetails, updateUser } from "../../api/auth";
 import { ClipLoader } from "react-spinners";
+import { CgProfile } from "react-icons/cg";
 
 function Profile() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -151,7 +333,7 @@ function Profile() {
   const [isEditing, setIsEditing] = useState(false);
   const [isResettingPassword, setIsResettingPassword] = useState(false);
   const [newPassword, setNewPassword] = useState("");
-  const [isLoading,setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [updatedUser, setUpdatedUser] = useState({
     name: user.name,
@@ -165,20 +347,28 @@ function Profile() {
     setIsDropdownOpen((prev) => !prev);
   };
 
-  // Close dropdown if clicking outside of it
+  // Close dropdown if clicking outside of the dropdown or profile icon
   const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target) &&
+      !event.target.closest(".profile-icon") // Check if click is outside profile icon
+    ) {
       setIsDropdownOpen(false);
       setIsResettingPassword(false);
     }
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
+    if (isDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [isDropdownOpen]);
 
   // Handle input changes
   const handleInputChange = (e) => {
@@ -199,10 +389,10 @@ function Profile() {
     await updateUser(user.id, changes);
     const userDetails = await getUserDetails(user.id);
     localStorage.setItem("user", JSON.stringify(userDetails.userDetails));
-     setTimeout(() => {
+    setTimeout(() => {
       setIsLoading(false); // Stop spinner
-    }, 4000); 
-  
+    }, 4000);
+
     setIsEditing(false);
   };
 
@@ -242,14 +432,13 @@ function Profile() {
 
   return (
     <div>
-      
       <div className="header">
         <div className="todo-app-text">Todo Application</div>
 
         <div className="profile-container">
           {/* Profile icon in the top-right corner */}
           <div className="profile-icon" onClick={toggleDropdown}>
-            <span role="img" aria-label="profile icon">👤</span>
+            <span role="img" aria-label="profile icon"><CgProfile color="white" /></span>
           </div>
           {/* Dropdown menu with Edit Profile and Reset Password options */}
           {isDropdownOpen && (
@@ -274,7 +463,7 @@ function Profile() {
               <button onClick={handleSignOut}>Sign Out</button>
               <button onClick={handleDeleteAccount}>Delete Account</button>
             </div>
-          )}     
+          )}
         </div>
       </div>
 
@@ -301,8 +490,8 @@ function Profile() {
           </>
         ) : (
           <>
-            <span>{isLoading? <ClipLoader color="#3498db" size={30} />: user.name}</span>
-            <p>You are logged in with {isLoading? <ClipLoader color="#3498db" size={30} />:user.email}</p>
+            <span>{isLoading ? <ClipLoader color="#3498db" size={30} /> : user.name}</span>
+            <p>You are logged in with {isLoading ? <ClipLoader color="#3498db" size={30} /> : user.email}</p>
           </>
         )}
       </div>
@@ -311,6 +500,7 @@ function Profile() {
 }
 
 export default Profile;
+
 
 
 

@@ -53,7 +53,7 @@ function Dashboard() {
       </div>
 
 
-          {isLoading? <ClipLoader color="#3498db" size={30} />: todos.map((todo) => (<div className="todo-list">
+          {isLoading? <ClipLoader color="#3498db" size={30} />: todos.map((todo,index) => (<div key={index} className="todo-list">
             <Todo
               key={todo.id}
               todo={todo}
