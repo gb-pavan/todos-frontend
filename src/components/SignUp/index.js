@@ -109,13 +109,24 @@ function SignUp() {
   };
 
   return (
-    <form className="signup-form" onSubmit={handleSubmit}>
-      <input name="name" placeholder="Name" onChange={handleChange} value={form.name} />
-      <input name="email" placeholder="Email" onChange={handleChange} value={form.email} />
-      <input name="password" type="password" placeholder="Password" onChange={handleChange} value={form.password} />
-      <button type="submit">Sign Up</button>
-      {message && <p className="message">{message}</p>}
-    </form>
+    <div className="form-container">
+      <form className="signup-form" onSubmit={handleSubmit}>
+        <p>Registration Form</p>
+        <div className="form-section">
+          <input name="name" placeholder="Name" onChange={handleChange} value={form.name} />
+        </div>
+        <div className="form-section">
+          <input name="email" placeholder="Email" onChange={handleChange} value={form.email} />
+        </div>
+        <div className="form-section">
+          <input name="password" type="password" placeholder="Password" onChange={handleChange} value={form.password} />
+        </div>
+        <div>
+          <button type="submit">Sign Up</button>
+        </div>
+        {message && <p className="message">{message}</p>}
+      </form>
+    </div>
   );
 }
 

@@ -1,0 +1,52 @@
+.form-container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.signup-form{   
+    display: flex;
+    flex-direction: column; 
+    background-color: rgb(237, 139, 139);
+    padding: 150px;
+    gap: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);    
+    width: 40%;
+}
+
+.signup-form p:nth-of-type(1){
+    color: white;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 80px;
+    font-weight: 900;
+    font-size: 30px;
+}
+
+.signup-form button{
+    padding: 20px;
+    cursor: pointer;
+}
+
+.form-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  background-color: green;
+  width: 100%;
+}
+
+.form-section input {
+  width: 100%; /* Set the width to 100% to make it take up the full container width */
+  padding: 10px; /* Increase the height by adding padding */
+  border: none; /* Remove the default border */
+  border-bottom: 2px solid #3498db; /* Add a bottom border */
+  outline: none; /* Remove the default outline when the input is focused */
+  font-size: 1rem; /* Optional: Increase font size */
+}

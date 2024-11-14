@@ -69,6 +69,14 @@ function Todo({ todo, onUpdate, onDelete }) {
     setIsEditing(false); // Exit edit mode
   };
 
+  const handleDeleteClick = async () => {
+    setIsLoading(true);
+    await onDelete(todo.id);
+    setTimeout(() => {
+      setIsLoading(false); // Stop spinner
+    }, 4000); 
+  }
+
   return (
     <div className="todo-item">
       {isEditing ? (
@@ -93,11 +101,11 @@ function Todo({ todo, onUpdate, onDelete }) {
       ) : (
         <>
           <span>{isLoading && editableTitle !== todo.title ?<ClipLoader color="#3498db" size={30} /> : todo.title}</span>
-          <button style={statusButtonStyles[todo.status]}>{isLoading && editableStatus !== todo.title ?<ClipLoader color="#3498db" size={30} /> : 
+          <button style={statusButtonStyles[todo.status]}>{isLoading && editableStatus !== todo.status ?<ClipLoader color="#3498db" size={30} /> : 
             todo.status}
           </button>
           <button onClick={handleEditClick}><FaEdit /></button>
-          <button onClick={() => onDelete(todo.id)}><MdDelete /></button>
+          <button onClick={handleDeleteClick}>{isLoading?<ClipLoader color="#3498db" size={30} /> :<MdDelete />}</button>
         </>
       )}
     </div>

@@ -21,11 +21,30 @@ function Login() {
   };
 
   return (
-    <form className="login-form" onSubmit={handleSubmit}>
-      <input name="email" placeholder="Email" onChange={handleChange} />
-      <input name="password" type="password" placeholder="Password" onChange={handleChange} />
-      <button type="submit">Login</button>
-    </form>
+    // <div className="login-form-container">
+    //   <form className="login-form" onSubmit={handleSubmit}>
+    //     <div className="login-fields">
+    //     <input name="email" placeholder="Email" onChange={handleChange} /></div>
+    //     <div className="login-fields">
+    //     <input name="password" type="password" placeholder="Password" onChange={handleChange} /></div>
+    //     <button type="submit">Login</button>
+    //   </form>
+    // </div>
+
+    <div className="form-container">
+      <form className="signup-form" onSubmit={handleSubmit}>
+        <p>Login Form</p>
+        <div className="form-section">
+          <input name="email" placeholder="Email" onChange={handleChange} />
+        </div>
+        <div className="form-section">
+          <input name="password" type="password" placeholder="Password" onChange={handleChange} />
+        </div>
+        <div>
+          <button type="submit">Sign In</button>
+        </div>
+      </form>
+    </div>
   );
 }
 
