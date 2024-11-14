@@ -1,5 +1,4 @@
 // src/api/todo.js
-let todos = [];
 
 // export const addTodo = (todo) => {
 //   console.log("nooooooooo",todo);
