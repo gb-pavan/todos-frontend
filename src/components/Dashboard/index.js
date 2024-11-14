@@ -26,7 +26,8 @@ function Dashboard() {
     fetchTodos();
     setTimeout(() => {
       setIsLoading(false); // Stop spinner
-    }, 4000); 
+    }, 4000);
+    setNewTodo(""); 
   };
 
   const handleUpdateTodo = async (id, updates) => {

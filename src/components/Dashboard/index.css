@@ -19,7 +19,6 @@
 } */
 
 .dashboard {
-    background-color: orange;
     text-align: center;
 }
 
@@ -29,6 +28,30 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 20px;
+  padding:20px;
+}
+
+.todo-section input {
+  width: 40%; /* Set the width to 100% to make it take up the full container width */
+  padding: 10px; /* Increase the height by adding padding */
+  border: none; /* Remove the default border */
+  border-bottom: 2px solid #3498db; /* Add a bottom border */
+  outline: none; /* Remove the default outline when the input is focused */
+  font-size: 1rem; /* Optional: Increase font size */
+}
+
+.todo-section button {
+  padding: 10px 20px; /* Style the button */
+  background-color: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.todo-section button:hover {
+  background-color: #2980b9;
 }
 
 .todo-list {

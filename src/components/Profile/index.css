@@ -15,6 +15,10 @@
   padding: 10px;
 }
 
+.user-info p{
+  padding-top: 20px;
+}
+
 /* User info section */
 .profile-info {
   flex-grow: 1;
