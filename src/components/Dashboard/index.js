@@ -42,19 +42,20 @@ function Dashboard() {
           onChange={(e) => setNewTodo(e.target.value)}
           placeholder="Add new todo"
         />
-        <button onClick={handleAddTodo}>Add Todo</button>
-        <div className="todos">
-          {todos.map((todo) => (
+        <button onClick={handleAddTodo}>Add Todo</button>        
+      </div>
+
+      
+          {todos.map((todo) => (<div className="todo-list">
             <Todo
               key={todo.id}
               todo={todo}
               onUpdate={handleUpdateTodo}
               onDelete={handleDeleteTodo}
-            />
+            /></div>
           ))}
-        </div>
       </div>
-    </div>
+    
   );
 }
 

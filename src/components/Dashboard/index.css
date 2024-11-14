@@ -1,0 +1,40 @@
+/* .dashboard{
+    background-color: orange;
+    text-align: center;
+}
+
+.todo-section{
+    display: flex;
+    justify-content: center;
+    background-color: red;
+    padding: 10px;
+    gap:20px;
+}
+
+.todos{
+    background-color: blue;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+} */
+
+.dashboard {
+    background-color: orange;
+    text-align: center;
+}
+
+.todo-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center todo items horizontally */
+  width: 100%;
+  gap: 10px; /* Spacing between todos */
+}

@@ -1,8 +1,17 @@
 /* Profile container */
 .profile-container {
-  position: relative;
+  position: relative; /* Set the container as the relative position reference */
+}
+
+.header{
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  padding:10px;
+  background-color: green;
+}
+
+.user-info{
   padding: 10px;
 }
 

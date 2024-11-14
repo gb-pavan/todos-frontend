@@ -234,9 +234,45 @@ function Profile() {
   };
 
   return (
-    <div className="profile-container">
-      <div className="profile-info">
-        <h2>Welcome,</h2>
+    <div>
+      
+      <div className="header">
+        <div>Todo Application</div>
+
+        <div className="profile-container">
+          {/* Profile icon in the top-right corner */}
+          <div className="profile-icon" onClick={toggleDropdown}>
+            <span role="img" aria-label="profile icon">👤</span>
+          </div>
+          {/* Dropdown menu with Edit Profile and Reset Password options */}
+          {isDropdownOpen && (
+            <div className="dropdown-menu" ref={dropdownRef}>
+              <button onClick={handleEditClick}>Edit Profile</button>
+
+              {isResettingPassword ? (
+                <div className="password-reset">
+                  <input
+                    type="password"
+                    placeholder="New password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                  />
+                  <button onClick={handlePasswordReset}>Confirm</button>
+                  <button onClick={() => setIsResettingPassword(false)}>Cancel</button>
+                </div>
+              ) : (
+                <button onClick={() => setIsResettingPassword(true)}>Reset Password</button>
+              )}
+
+              <button onClick={handleSignOut}>Sign Out</button>
+              <button onClick={handleDeleteAccount}>Delete Account</button>
+            </div>
+          )}     
+        </div>
+      </div>
+
+      <div className="user-info">
+        <span>Welcome , </span>
         {isEditing ? (
           <>
             <input
@@ -259,40 +295,10 @@ function Profile() {
         ) : (
           <>
             <span>{user.name}</span>
-            <p>{user.email}</p>
+            <p>You are logged in with {user.email}</p>
           </>
         )}
       </div>
-
-      {/* Profile icon in the top-right corner */}
-      <div className="profile-icon" onClick={toggleDropdown}>
-        <span role="img" aria-label="profile icon">👤</span>
-      </div>
-
-      {/* Dropdown menu with Edit Profile and Reset Password options */}
-      {isDropdownOpen && (
-        <div className="dropdown-menu" ref={dropdownRef}>
-          <button onClick={handleEditClick}>Edit Profile</button>
-
-          {isResettingPassword ? (
-            <div className="password-reset">
-              <input
-                type="password"
-                placeholder="New password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-              />
-              <button onClick={handlePasswordReset}>Confirm</button>
-              <button onClick={() => setIsResettingPassword(false)}>Cancel</button>
-            </div>
-          ) : (
-            <button onClick={() => setIsResettingPassword(true)}>Reset Password</button>
-          )}
-
-          <button onClick={handleSignOut}>Sign Out</button>
-          <button onClick={handleDeleteAccount}>Delete Account</button>
-        </div>
-      )}
     </div>
   );
 }

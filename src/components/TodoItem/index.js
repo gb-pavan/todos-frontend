@@ -23,11 +23,23 @@
 // src/components/Dashboard/Todo.js
 import React, { useState } from "react";
 import "./index.css";
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+
+
 
 function Todo({ todo, onUpdate, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editableTitle, setEditableTitle] = useState(todo.title);
   const [editableStatus, setEditableStatus] = useState(todo.status);
+
+   // Define button styles for each status type
+  const statusButtonStyles = {
+    Pending: { backgroundColor: "orange", color: "#fff" },
+    InProgress: { backgroundColor: "blue", color: "#fff" },
+    Completed: { backgroundColor: "green", color: "#fff" },
+    Done: { backgroundColor: "gray", color: "#fff" },
+  };
 
   // Toggle edit mode
   const handleEditClick = () => {
@@ -61,6 +73,8 @@ function Todo({ todo, onUpdate, onDelete }) {
             value={editableStatus}
             onChange={(e) => setEditableStatus(e.target.value)}
           >
+            <option value="In Progress">In Progress</option>
+            <option value="Done">Done</option>
             <option value="Pending">Pending</option>
             <option value="Completed">Completed</option>
           </select>
@@ -70,9 +84,9 @@ function Todo({ todo, onUpdate, onDelete }) {
       ) : (
         <>
           <span>{todo.title}</span>
-          <button>{todo.status}</button>
-          <button onClick={handleEditClick}>Edit</button>
-          <button onClick={() => onDelete(todo.id)}>Delete</button>
+          <button style={statusButtonStyles[todo.status]}>{todo.status}</button>
+          <button onClick={handleEditClick}><FaEdit /></button>
+          <button onClick={() => onDelete(todo.id)}><MdDelete /></button>
         </>
       )}
     </div>

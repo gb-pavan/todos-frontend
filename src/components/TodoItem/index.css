@@ -1,0 +1,65 @@
+/* Basic reset for padding and margin */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .todo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ddd; /* Border for each row */
+    border-radius: 5px;
+    margin-bottom: 8px; /* Spacing between items */
+    background-color: #f9f9f9; /* Light background for contrast */
+    width: 60%;
+    background-color: pink;
+  }
+  
+  .todo-item span {
+    flex: 1;
+    font-size: 1rem;
+    color: #333;
+    padding: 5px;
+  }
+  
+  .todo-item select,
+  .todo-item input[type="text"] {
+    padding: 5px;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 150px;
+  }
+  
+  .todo-item button {
+    margin-left: 8px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  /* Button styles */
+  .todo-item button:nth-of-type(1) { /* Status button */
+    background-color: #007bff;
+  }
+  
+  .todo-item button:nth-of-type(2) { /* Edit button */
+    background-color: #28a745;
+  }
+  
+  .todo-item button:nth-of-type(3) { /* Delete button */
+    background-color: #dc3545;
+  }
+  
+  .todo-item button:hover {
+    opacity: 0.85;
+  }
+  
