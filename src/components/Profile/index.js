@@ -244,7 +244,7 @@ function Profile() {
     <div>
       
       <div className="header">
-        <div>Todo Application</div>
+        <div className="todo-app-text">Todo Application</div>
 
         <div className="profile-container">
           {/* Profile icon in the top-right corner */}

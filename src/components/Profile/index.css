@@ -11,6 +11,10 @@
   background-color: green;
 }
 
+.todo-app-text{
+  color: white;
+}
+
 .user-info{
   padding: 10px;
 }
