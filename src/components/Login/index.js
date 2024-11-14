@@ -38,14 +38,14 @@ function Login() {
     //   </form>
     // </div>
 
-    <div className="form-container">
-      <form className="signup-form" onSubmit={handleSubmit}>
+    <div className="login-container">
+      <form className="login-form" onSubmit={handleSubmit}>
         <p>Login Form</p>
-        <div className="form-section">
-          <input name="email" placeholder="Email" onChange={handleChange} />
+        <div className="login-section">
+          <input name="email" placeholder="Email" onChange={handleChange} required />
         </div>
-        <div className="form-section">
-          <input name="password" type="password" placeholder="Password" onChange={handleChange} />
+        <div className="login-section">
+          <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
         </div>
         <div>
           <button type="submit">Sign In</button>

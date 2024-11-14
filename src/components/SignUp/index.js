@@ -85,6 +85,10 @@ function SignUp() {
   const [isLoading,setIsLoading]= useState(false);
   const navigate = useNavigate();
 
+  const handleSignIn = () => {
+    navigate("/login");
+  }
+
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
@@ -114,16 +118,18 @@ function SignUp() {
 
   return (
     <div className="form-container">
+      
       <form className="signup-form" onSubmit={handleSubmit}>
+        <p>Already registered? <button onClick={handleSignIn}>Sign In</button></p>
         <p>Registration Form</p>
         <div className="form-section">
-          <input name="name" placeholder="Name" onChange={handleChange} value={form.name} />
+          <input name="name" placeholder="Name" onChange={handleChange} value={form.name} required/>
         </div>
         <div className="form-section">
-          <input name="email" placeholder="Email" onChange={handleChange} value={form.email} />
+          <input name="email" placeholder="Email" onChange={handleChange} value={form.email} required />
         </div>
         <div className="form-section">
-          <input name="password" type="password" placeholder="Password" onChange={handleChange} value={form.password} />
+          <input name="password" type="password" placeholder="Password" onChange={handleChange} value={form.password} required/>
         </div>
         <div>
           <button type="submit">Sign Up</button>
